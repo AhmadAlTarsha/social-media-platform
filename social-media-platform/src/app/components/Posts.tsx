@@ -8,14 +8,33 @@ const Posts = () => {
 const [posts,setPosts]=useState([])
 
 
+
 const getPosts=async()=>{
 
     try {
-       const res= await axios.get("https://jsonplaceholder.typicode.com/posts") 
 
-       console.log(res.data);
 
+       const res= await axios.get("https://jsonplaceholder.typicode.com/posts")
+       
        setPosts(res.data)
+       
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+
+
+}
+const getPostComments=async( postId)=>{
+
+    try {
+
+
+       const res= await axios.get(`https://jsonplaceholder.typicode.com/post/${postId}/comments`)
+       
+     console.log(res.data);
+     
        
     } catch (error) {
         console.log(error);
@@ -27,6 +46,8 @@ const getPosts=async()=>{
 }
 
 
+
+
 useEffect(()=>{
 getPosts()
 
@@ -36,7 +57,7 @@ getPosts()
  // Component implementation
   return (
    posts.map((element)=>{
-    console.log(element);
+   
     return(
        <div className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden">
     <div className="px-6 py-4">
@@ -54,7 +75,11 @@ getPosts()
       <div className="font-bold text-lg mb-2">Comments</div>
       <div className="p-4 border-b border-gray-200">
         <div className="font-semibold">Comment Author</div>
-        <div>This is a comment on the post.</div>
+        <button onClick={()=>{
+            getPostComments(element.id)
+            //console.log(element.id);
+            
+        }}>This is a comment on the post.</button>
       </div>
     </div>
   </div>  
