@@ -1,13 +1,13 @@
 
 
 
-import HomePage from  "@/app/components/Button" 
+import BTN from  "@/app/components/Button" 
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main >
      
-<HomePage/>
+<BTN/>
      
     </main>
   );
