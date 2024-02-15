@@ -88,23 +88,41 @@ const getComment = (postId) => {
         </div>
     ));
 };
-const getPostAuthor = (userId) => {
+// const getPostAuthor = (userId) => {
    
+//     console.log(userId);
+    
+//     // Filter comments for the current post
+//     // const filteredAuthor = authors.filter(author => posts.userId === author.userId);
+
+
+
+//     // Return JSX for each comment
+//     // return filteredComments.map((comment) => (
+//     //     <div key={comment.id} className="mt-2">
+//     //         <p className="text-sm font-semibold">{comment.name} says:</p>
+//     //         <p className="text-sm text-gray-600">{comment.body}</p>
+//     //     </div>
+//     // ));
+// };
+
+const getPostAuthor = (userId) => {
     console.log(userId);
     
-    // Filter comments for the current post
-    // const filteredAuthor = authors.filter(author => posts.userId === author.userId);
+    // Find the author matching the userId
+    const author = authors?.filter(author => author.id === userId);
+    console.log(author);
+    
 
+    return author.map((currentAuthor) => (
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">   Author : {currentAuthor?.name}</span>
+    ));
 
-
-    // Return JSX for each comment
-    // return filteredComments.map((comment) => (
-    //     <div key={comment.id} className="mt-2">
-    //         <p className="text-sm font-semibold">{comment.name} says:</p>
-    //         <p className="text-sm text-gray-600">{comment.body}</p>
-    //     </div>
-    // ));
+    // Return a JSX element containing the author's name, or a default text if not found
+    
+  
 };
+
 
 
 useEffect(()=>{
@@ -130,9 +148,7 @@ getAuthors()
       </p>
     </div>
     <div className="px-6 pt-4 pb-2">
-      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-        By Post Creator
-      </span>
+    
       {
       getPostAuthor(element?.userId)}
 
