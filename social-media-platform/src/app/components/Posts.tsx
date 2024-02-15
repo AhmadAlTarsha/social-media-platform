@@ -6,6 +6,7 @@ import React, { useEffect, useState }   from 'react'
 
 const Posts = () => {
 const [posts,setPosts]=useState([])
+const [comments,setComments]=useState([])
 
 
 
@@ -16,7 +17,8 @@ const getPosts=async()=>{
 
        const res= await axios.get("https://jsonplaceholder.typicode.com/posts")
        
-       setPosts(res.data)
+       setPosts(res?.data)
+    
        
     } catch (error) {
         console.log(error);
@@ -26,14 +28,16 @@ const getPosts=async()=>{
 
 
 }
-const getPostComments=async( postId)=>{
+const getPostComments=async( )=>{
 
     try {
 
 
-       const res= await axios.get(`https://jsonplaceholder.typicode.com/post/${postId}/comments`)
+       const res= await axios.get(`https://jsonplaceholder.typicode.com/comments`)
        
-     console.log(res.data);
+setComments(res?.data)
+
+     //console.log(res?.data);
      
        
     } catch (error) {
@@ -45,12 +49,29 @@ const getPostComments=async( postId)=>{
 
 }
 
+const getComment = (postId) => {
+   console.log(postId);
+   
+    
+    // Filter comments for the current post
+    const filteredComments = comments.filter(comment => comment.postId === postId);
 
+
+    // Return JSX for each comment
+    return filteredComments.map((comment) => (
+        <div key={comment.id} className="mt-2">
+            <p className="text-sm font-semibold">{comment.email} says:</p>
+            <p className="text-sm text-gray-600">{comment.body}</p>
+        </div>
+    ));
+};
 
 
 useEffect(()=>{
+    
+    
 getPosts()
-
+getPostComments()
 },[])
 
 
@@ -59,9 +80,10 @@ getPosts()
    posts.map((element)=>{
    
     return(
-       <div className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden">
+       <div key={element.id} className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden">
     <div className="px-6 py-4">
-      <div className="font-bold text-xl mb-2">{element.title}</div>
+      <div className="font-bold text-xl mb-2"><p> post N.{element.id}</p>
+        {  element.title}</div>
       <p className="text-gray-700 text-base">
         {element.body}
       </p>
@@ -72,17 +94,19 @@ getPosts()
       </span>
     </div>
     <div className="px-6 py-4">
-      <div className="font-bold text-lg mb-2">Comments</div>
-      <div className="p-4 border-b border-gray-200">
-        <div className="font-semibold">Comment Author</div>
-        <button onClick={()=>{
-            getPostComments(element.id)
-            //console.log(element.id);
-            
-        }}>This is a comment on the post.</button>
+      <h5 className="font-bold text-lg mb-2">Comments</h5>
+      {
+      
+      
+      getComment(element?.id)}
+    
+
+      
+        
       </div>
+    
     </div>
-  </div>  
+   
     )
    
    })
