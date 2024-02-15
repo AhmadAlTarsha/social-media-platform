@@ -1,30 +1,48 @@
+ "use client"
 import axios from 'axios'
+import React, { useEffect, useState }   from 'react'
 
-import React, { useEffect, useState } from 'react'
-// const axios=require("axios")
-
-const getPostsFunction=async()=>{
-
-
-   
-}
-
-// useEffect(()=>{
-// getPostsFunction()
-
-
-// })
 
 
 const Posts = () => {
+const [posts,setPosts]=useState([])
 
 
+const getPosts=async()=>{
+
+    try {
+       const res= await axios.get("https://jsonplaceholder.typicode.com/posts") 
+
+       console.log(res.data);
+
+       setPosts(res.data)
+       
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+
+
+}
+
+
+useEffect(()=>{
+getPosts()
+
+},[])
+
+
+ // Component implementation
   return (
-    <div className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden">
+   posts.map((element)=>{
+    console.log(element);
+    return(
+       <div className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden">
     <div className="px-6 py-4">
-      <div className="font-bold text-xl mb-2">Post Title</div>
+      <div className="font-bold text-xl mb-2">{element.title}</div>
       <p className="text-gray-700 text-base">
-        This is the post description, providing details about the post content.
+        {element.body}
       </p>
     </div>
     <div className="px-6 pt-4 pb-2">
@@ -39,7 +57,10 @@ const Posts = () => {
         <div>This is a comment on the post.</div>
       </div>
     </div>
-  </div>
+  </div>  
+    )
+   
+   })
   )
 }
 
