@@ -1,11 +1,13 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loader from "../components/Loader/loader";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [authors, setAuthor] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   type Geo = {
     lat: string;
@@ -49,6 +51,7 @@ const Posts = () => {
       if (res.data?.length > 0) {
         setPosts(res?.data);
         getPostComments();
+        setLoader(false)
       }
     } catch (error) {
       console.log(error);
@@ -118,7 +121,7 @@ const Posts = () => {
   }, []);
 
   // Component implementation
-  return posts.map((post: Post) => {
+  return (<>{loader?<Loader/>:posts?.map((post: Post) => {
     return (
       <div
         key={post?.id}
@@ -139,7 +142,8 @@ const Posts = () => {
         </div>
       </div>
     );
-  });
+  })}</>)
+  
 };
 
 export default Posts;
