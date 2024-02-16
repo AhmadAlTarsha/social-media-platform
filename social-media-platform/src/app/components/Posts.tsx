@@ -60,7 +60,7 @@ const Posts = () => {
       const res = await axios.get("https://jsonplaceholder.typicode.com/users");
 
       setAuthor(res?.data);
-      // console.log(res?.data);
+    
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +80,7 @@ const Posts = () => {
     }
   };
 
-  const getComment = (postId: number) => {
+  const getComments = (postId: number) => {
     // Filter comments for the current post
     const filteredComments = comments.filter(
       (comment: Comment) => comment.postId === postId
@@ -94,12 +94,13 @@ const Posts = () => {
       </div>
     ));
   };
-
+  
   const getPostAuthor = (userId: number) => {
     // Find the author matching the userId
     const author = authors?.filter((author: User) => author.id === userId);
     // console.log(author);
-
+    
+    // Return a JSX element containing the author's name,
     return author.map((currentAuthor: User) => (
       <span
         key={currentAuthor.id}
@@ -109,7 +110,6 @@ const Posts = () => {
       </span>
     ));
 
-    // Return a JSX element containing the author's name, or a default text if not found
   };
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const Posts = () => {
 
         <div className="px-6 py-4">
           <h5 className="font-bold text-lg mb-2">Comments</h5>
-          {getComment(post?.id)}
+          {getComments(post?.id)}
         </div>
       </div>
     );
