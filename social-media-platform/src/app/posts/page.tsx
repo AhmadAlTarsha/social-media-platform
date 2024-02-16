@@ -105,12 +105,17 @@ const Posts = () => {
     
     // Return a JSX element containing the author's name,
     return author.map((currentAuthor: User) => (
-      <span
+      <button onClick={()=>{
+        console.log(currentAuthor);
+        
+      }
+      }
         key={currentAuthor.id}
         className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
       >
         Author : {currentAuthor?.name}
-      </span>
+        
+      </button>
     ));
 
   };
@@ -121,28 +126,31 @@ const Posts = () => {
   }, []);
 
   // Component implementation
-  return (<>{loader?<Loader/>:posts?.map((post: Post) => {
+  return (<main className="flex flex-wrap justify-center items-start gap-1 p-2">{loader?<Loader/>:posts?.map((post: Post) => {
     return (
       <div
-        key={post?.id}
-        className="max-w-xl mx-auto my-8 bg-white shadow-lg rounded-lg overflow-hidden"
-      >
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">
-            <p> post N.{post.id}</p>
-            {post.title}
-          </div>
-          <p className="text-gray-700 text-base">{post.body}</p>
+      key={post?.id}
+      className="max-w-xl mx-auto my-8 bg-gradient-to-r from-blue-100 to-blue-50 shadow-xl rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
+    >
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">
+          <p className="text-blue-800">Post N.{post.id}</p>
+          <p className="text-gray-900">{post.title}</p>
         </div>
-        <div className="px-6 pt-4 pb-2">{getPostAuthor(post?.userId)}</div>
-
-        <div className="px-6 py-4">
-          <h5 className="font-bold text-lg mb-2">Comments</h5>
-          {getComments(post?.id)}
-        </div>
+        <p className="text-gray-700 text-base">{post.body}</p>
       </div>
+      <div className="px-6 pt-4 pb-2 flex items-center">
+        {getPostAuthor(post?.userId)}
+      </div>
+    
+      <div className="px-6 py-4">
+        <h5 className="font-bold text-lg mb-2 text-gray-800">Comments</h5>
+        {getComments(post?.id)}
+      </div>
+    </div>
+    
     );
-  })}</>)
+  })}</main>)
   
 };
 
