@@ -1,7 +1,9 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+
 import Loader from "../components/Loader/loader";
+import Link from "next/link";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -98,24 +100,22 @@ const Posts = () => {
     ));
   };
   
-  const getPostAuthor = (userId: number) => {
+  const getPostAuthor = (userId: number,postId:number) => {
     // Find the author matching the userId
     const author = authors?.filter((author: User) => author.id === userId);
     // console.log(author);
     
     // Return a JSX element containing the author's name,
     return author.map((currentAuthor: User) => (
-      <button onClick={()=>{
-        console.log(currentAuthor);
-        
-      }
-      }
+     
+      
+      <Link href={`posts/${postId}/author`}
         key={currentAuthor.id}
         className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
       >
         Author : {currentAuthor?.name}
         
-      </button>
+      </Link>
     ));
 
   };
@@ -140,7 +140,7 @@ const Posts = () => {
         <p className="text-gray-700 text-base">{post.body}</p>
       </div>
       <div className="px-6 pt-4 pb-2 flex items-center">
-        {getPostAuthor(post?.userId)}
+        {getPostAuthor(post?.userId,post?.id)}
       </div>
     
       <div className="px-6 py-4">

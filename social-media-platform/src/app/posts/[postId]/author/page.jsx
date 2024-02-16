@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const UserData = () => {
+const UserData = ({postNumber,authorId}) => {
+  console.log(postNumber,authorId);
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <div className="p-8">
