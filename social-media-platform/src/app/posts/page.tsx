@@ -1,11 +1,15 @@
 "use client";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Loader from "../components/Loader/loader";
 import Link from "next/link";
+import UserData from "./[postId]/author/page"; 
 
-const Posts = () => {
+const Posts = ({}) => {
+  const router =useRouter()
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [authors, setAuthor] = useState([]);
@@ -47,6 +51,7 @@ const Posts = () => {
   };
 
   const getPosts = async () => {
+    
     try {
       const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
 
@@ -103,19 +108,23 @@ const Posts = () => {
   const getPostAuthor = (userId: number,postId:number) => {
     // Find the author matching the userId
     const author = authors?.filter((author: User) => author.id === userId);
-    // console.log(author);
+     
+     
     
     // Return a JSX element containing the author's name,
     return author.map((currentAuthor: User) => (
-     
+    
       
-      <Link href={`posts/${postId}/author`}
-        key={currentAuthor.id}
+      <button 
+      onClick={()=>{
+        router.push(`/posts/${userId}/author`,)
+      }}
+        key={currentAuthor?.id}
         className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
       >
         Author : {currentAuthor?.name}
         
-      </Link>
+      </button>
     ));
 
   };
