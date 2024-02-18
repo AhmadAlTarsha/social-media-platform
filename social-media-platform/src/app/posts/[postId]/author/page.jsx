@@ -11,7 +11,7 @@ export default function UserData ({params})  {
   
 
 const getCurrentAuthor=async()=>{
-console.log(params.postId);
+console.log(params?.userId);
 
 ;
   try {
