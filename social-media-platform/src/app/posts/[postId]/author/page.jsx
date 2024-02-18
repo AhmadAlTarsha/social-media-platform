@@ -11,13 +11,13 @@ export default function UserData ({params})  {
   
 
 const getCurrentAuthor=async()=>{
-console.log(params?.userId);
+
 
 ;
   try {
     const res = await axios.get("https://jsonplaceholder.typicode.com/users");
 setAuthors(res?.data)
- console.log(res.data);
+
 
 
   
@@ -39,7 +39,7 @@ const currentAuthor=authors?.filter((element)=>{
 })
 
 
-console.log(currentAuthor);
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100" > <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <div className="p-8">
