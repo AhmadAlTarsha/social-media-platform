@@ -2,14 +2,12 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
 import Loader from "../components/Loader/loader";
 import Link from "next/link";
-import UserData from "./[postId]/author/page"; 
+
 
 const Posts = ({}) => {
-  const router =useRouter()
+  // use state hooks to update the state 
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [authors, setAuthor] = useState([]);
