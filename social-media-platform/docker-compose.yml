@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       dockerfile: dockerfile
-    container_name: social-plateform
+    container_name: social-media-platform
     ports:
       - '3000:3000'
     volumes:
