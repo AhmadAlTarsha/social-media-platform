@@ -5,6 +5,7 @@ import Button from '@/app/components/Button/Button';
 import axios from "axios";
 import { useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Head from 'next/head';
 
 export default function UserData ({params})  {
  const router =useRouter()
@@ -43,7 +44,8 @@ const currentAuthor=authors?.filter((element)=>{
 
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <><Head> <title>AuthorDetails</title></Head>
+     <div className="flex items-center justify-center h-screen bg-gray-100">
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
         <div className="p-8">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Author Profile</div>
@@ -77,7 +79,8 @@ router.push("/posts")
             </button>
         </div>
     </div>
-</div>
+</div></>
+   
  
    
   );
