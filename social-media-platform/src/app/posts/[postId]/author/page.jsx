@@ -7,11 +7,12 @@ import { useEffect,useState } from 'react';
 
 export default function UserData ({params})  {
  
+  
   const [authors,setAuthors]=useState([])
   
 
 const getCurrentAuthor=async()=>{
-
+ 
 
 ;
   try {
