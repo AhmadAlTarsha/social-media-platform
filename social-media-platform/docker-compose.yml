@@ -4,10 +4,10 @@ services:
   app:
     build: 
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     container_name: social-media-platform
     ports:
       - '3000:3000'
+    command: "npm run dev"
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./:/app
